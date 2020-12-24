@@ -28,6 +28,7 @@
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {
+    "eslint": "^7.16.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.6"
   }
