@@ -18,11 +18,7 @@ router.post("/signup", validatePayload, validateUsernameUnique, (req, res) => {
       .then((usr) => {
         res.status(201).json(usr);
       })
-      .catch(() =>
-        res
-          .status(500)
-          .json("Sorry the selected Username taken, please choose again.")
-      );
+      .catch((error) => res.status(500).json({ message: error.message }));
   } else {
     res.status(400).json({ message: "Invalid credentials, please try again." });
   }
