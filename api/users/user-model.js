@@ -1,4 +1,4 @@
-const db = require("db-here");
+const db = require("../../data/dbConfig");
 
 module.exports = {
   getAll() {
