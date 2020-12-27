@@ -1,4 +1,4 @@
-const router = require("express").Router();
+const express = require("express");
 const bcrypt = require("bcryptjs");
 const Helper = require("../users/user-model");
 const tokenCreator = require("./token-creator");
@@ -8,30 +8,21 @@ const {
   validateUsernameUnique,
 } = require("../middlewares/validation-middleware");
 
-router.post(
-  "/register",
-  validatePayload,
-  validateUsernameUnique,
-  (req, res) => {
-    if (validatePermissions(req.User)) {
-      const hash = bcrypt.hashSync(req.User.password, 9);
-      req.User.password = hash;
-      Helper.create(req.User)
-        .then((usr) => {
-          res.status(201).json(usr);
-        })
-        .catch(() =>
-          res
-            .status(500)
-            .json("Sorry the selected Username taken, please choose again.")
-        );
-    } else {
-      res
-        .status(400)
-        .json({ message: "Invalid credentials, please try again." });
-    }
+const router = express.Router();
+
+router.post("/signup", validatePayload, validateUsernameUnique, (req, res) => {
+  if (validatePermissions(req.User)) {
+    const hash = bcrypt.hashSync(req.User.password, 9);
+    req.User.password = hash;
+    Helper.create(req.User)
+      .then((usr) => {
+        res.status(201).json(usr);
+      })
+      .catch((error) => res.status(500).json({ message: error.message }));
+  } else {
+    res.status(400).json({ message: "Invalid credentials, please try again." });
   }
-);
+});
 
 router.post("/login", validatePayload, (req, res) => {
   if (validatePermissions(req.body)) {
@@ -52,4 +43,5 @@ router.post("/login", validatePayload, (req, res) => {
     res.status(401).json("Invalid credentials, please try again.");
   }
 });
+
 module.exports = router;
