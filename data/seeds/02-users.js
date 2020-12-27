@@ -7,12 +7,22 @@ exports.seed = function (knex) {
       return knex("users").insert([
         {
           username: "First-User",
-          password: "salkdasldask3242389e4ijasfdksanf",
+          password: "salkdasldask3242389e4ijagjhgjkllpsfdksanf",
           role: 1,
         },
         {
           username: "Second-User",
-          password: "salkdasldask3242389e4sadasijasfdk",
+          password: "salkdasldask3242389e4saghjghjdasij;'8asfdk",
+          role: 1,
+        },
+        {
+          username: "Third-User",
+          password: "salkdasldask32ghj42389e6664sadasijasf456dk",
+          role: 1,
+        },
+        {
+          username: "Fourth-User",
+          password: "salkdasldask3242389e4saasdsadsadsgf34534dk",
           role: 2,
         },
       ]);

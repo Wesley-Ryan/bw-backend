@@ -10,7 +10,7 @@ const sharedConfig = {
 module.exports = {
   development: {
     ...sharedConfig,
-    connection: { filename: "./data/users.db3" },
+    connection: { filename: "./data/VRFund.db3" },
     seeds: { directory: "./data/seeds" },
   },
 
