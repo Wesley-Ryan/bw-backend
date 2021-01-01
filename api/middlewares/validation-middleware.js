@@ -47,9 +47,19 @@ const validatePermissions = (user) => {
   );
 };
 
+const validateUserFundraiserRole = (req, res, next) => {
+  const { role } = req.header;
+  if (role != 1) {
+    req.status(400).json({ message: "You must be a Fundrasier" });
+  } else {
+    next();
+  }
+};
+
 module.exports = {
   validator,
   validatePermissions,
   validatePayload,
   validateUsernameUnique,
+  validateUserFundraiserRole,
 };
