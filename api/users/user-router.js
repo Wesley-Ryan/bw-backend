@@ -6,9 +6,15 @@ const router = express.Router();
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const userInfo = await Helper.findByID(id);
+    const user = await Helper.findByID(id);
     const userProjects = await ProjectHelper.getByOwnerId(id);
-    res.status(200).json({ user: userInfo, projects: userProjects });
+    res
+      .status(200)
+      .json({
+        username: user.username,
+        role: user.role,
+        projects: userProjects,
+      });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
