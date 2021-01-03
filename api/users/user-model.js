@@ -4,8 +4,8 @@ module.exports = {
   getAll() {
     return db("users");
   },
-  findBy(filter) {
-    return db("users").where(filter);
+  findByID(id) {
+    return db("users").where("id", id).first();
   },
 
   async create(user) {

@@ -48,9 +48,10 @@ const validatePermissions = (user) => {
 };
 
 const validateUserFundraiserRole = (req, res, next) => {
-  const { role } = req.header;
+  const { role } = req.headers;
+  console.log(role);
   if (role != 1) {
-    req.status(400).json({ message: "You must be a Fundrasier" });
+    res.status(400).json({ message: "You must be a Fundrasier" });
   } else {
     next();
   }
