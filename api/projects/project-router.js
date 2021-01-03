@@ -1,5 +1,10 @@
 const express = require("express");
 const Helper = require("./project-model");
+const {
+  validatePermissions,
+  validateUserFundraiserRole,
+  validator,
+} = require("../middlewares/validation-middleware");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
@@ -21,7 +26,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", validator, validateUserFundraiserRole, async (req, res) => {
   const project = req.body;
   try {
     const newProjectPost = await Helper.create(project);
